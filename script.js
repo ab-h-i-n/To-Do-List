@@ -56,6 +56,7 @@ function getHoveredCardId() {
     card.addEventListener("mouseover", function() {
       currentCard = document.getElementById(this.id);
       console.log(this.id);
+      addTouchHoldEvent();
       addDoubleClickEvent();
       addStrike();
     });
@@ -78,7 +79,21 @@ function addDoubleClickEvent() {
 }
 
 
-
+function addTouchHoldEvent() {
+  let holdTimer = null;
+  currentCard.addEventListener("touchstart", function(event) {
+    event.preventDefault(); // Prevent default touch behavior, like scrolling
+    holdTimer = setTimeout(function() {
+      currentCard.classList.add("removecard");
+      currentCard.addEventListener("animationend", function() {
+        currentCard.remove();
+      });
+    }, 1000); // Change the delay time to adjust the hold duration
+  });
+  currentCard.addEventListener("touchend", function() {
+    clearTimeout(holdTimer);
+  });
+}
 
 
 function addStrike() {
