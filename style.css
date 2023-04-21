@@ -1,0 +1,201 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+:root{
+    --container-color:white;
+    --button-color:#51e4a5;
+    --button-icon-color:#41b27e;
+    --checked-text-color:rgba(0, 0, 0, 0.366);
+    --uncheked-text-color:black;
+    --container-width:350px;
+    --container-height:550px;
+    --button-size:80px;
+    --button-icon-size:calc(var(--button-size) - 30px);
+    --grey-light-color:rgb(169, 169, 169);
+}
+body{
+    height: max(100vh);
+    width: max(100vw);
+    background:#f0efe9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.all{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.container{
+    background-color: var(--container-color);
+    width:var(--container-width);
+    height:var(--container-height);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding:3rem 0px 3rem 0px
+}
+.add{
+    position:relative;
+    top:-38px;
+    background-color: var(--button-color);
+    border-radius: 50%;
+    width: var(--button-size);
+    height: var(--button-size);
+    display: grid;
+    place-content: center;
+    font-weight: 300;
+    color: var(--button-icon-color);
+    font-size: var(--button-icon-size);
+    cursor: pointer;
+    transition: 150ms;
+}
+.add:hover,
+.add:focus{
+    filter: brightness(90%);
+}
+.add:active{
+    transform: scale(.9);
+}
+.date{
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-template-areas: "d my w";
+    column-gap: 5px;
+    padding:0px 2.5rem 0px 2.5rem ;
+}
+.day{
+    grid-area: d;
+    font-weight: 500;
+    font-size: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.m-y{
+    grid-area: my;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+.month,
+.year{
+    font-size: 15px;
+}
+.month{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-weight: 500;
+}
+.year{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-weight: 200;
+}
+.week{
+    grid-area: w;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.list-area{
+    padding-top: 10px;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+.card{
+    margin: 0px auto 10px auto;
+    width: 80%;
+    height: 56px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.297);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .8rem;
+    transition: 150ms;
+    animation: appear 150ms linear;
+}
+.card:hover,
+.card:focus{
+    transform: scale(1.1);
+    background-color: rgba(222, 222, 222, 0.107);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.297);
+}
+.text{
+    width: 47%;
+}
+.text:focus{
+    outline: none;
+}
+.text:empty:not(.text:focus)::before{
+    content:"Enter text here";
+    color: grey;
+}
+.text.strike{
+    color:var(--grey-light-color);
+    text-decoration: line-through;
+  }
+@keyframes appear {
+    from{
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+/* checkbox */
+input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    background-color:lightgrey;
+    /* Not removed via appearance */
+    margin: 0;
+
+    width: 25px;
+    height: 25px;
+    border: 1.7px solid rgb(219, 219, 219);
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+  
+    display: grid;
+    place-content: center;
+  }
+  
+  input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    /* Windows High Contrast Mode */
+    background-color: white;
+  }
+  
+  input[type="checkbox"]:checked{
+    background-color:var(--button-color);
+  }
+  input[type="checkbox"]:checked::before {
+    transform: scale(1);
+  }
+
+  .focused{
+    background-color: red;
+  }
