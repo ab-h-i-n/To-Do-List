@@ -62,14 +62,36 @@ function getHoveredCardId() {
   });
 }
 
+// function addDoubleClickEvent() {
+//   currentCard.addEventListener("dblclick", function() {
+//     currentCard.classList.add("removecard")
+//   });
+//   currentCard.addEventListener("animationend",()=>{
+//     currentCard.remove();
+//   });
+// }
+
 function addDoubleClickEvent() {
-  currentCard.addEventListener("dblclick", function() {
-    currentCard.classList.add("removecard")
+  let touchstartPos = null;
+  currentCard.addEventListener("touchstart", function(event) {
+    if (event.touches.length === 1) {
+      touchstartPos = event.touches[0].clientX;
+    }
   });
-  currentCard.addEventListener("animationend",()=>{
-    currentCard.remove();
+  currentCard.addEventListener("touchend", function(event) {
+    if (event.changedTouches.length === 1 && touchstartPos !== null) {
+      const touchendPos = event.changedTouches[0].clientX;
+      if (touchendPos === touchstartPos) {
+        currentCard.classList.add("removecard");
+        currentCard.addEventListener("animationend", ()=>{
+          currentCard.remove();
+        });
+      }
+    }
+    touchstartPos = null;
   });
 }
+
 
 function addStrike() {
   let currentCheckbox = currentCard.querySelector(".card input[type=checkbox]");
