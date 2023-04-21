@@ -2,6 +2,7 @@ var addButton = document.querySelector(".add");
 var count = 0;
 var currentCard;
 var textField;
+var listArea;
 
 window.onload = function() {
   setDate();
@@ -14,7 +15,7 @@ addButton.addEventListener("click", () => {
 
 function addList() {
   count++;
-  let listArea = document.querySelector(".list-area");
+  listArea = document.querySelector(".list-area");
   let card = document.createElement("card");
   textField = document.createElement("div");
   let checkBox = document.createElement("input");
@@ -24,7 +25,8 @@ function addList() {
 
   textField.classList.add("text");
   textField.id = "text-" + count;
-  textField.contentEditable = "false";
+  textField.contentEditable = "true";
+  textField.focus();
 
   checkBox.type = "checkbox";
   checkBox.id = "checkbox-" + count;
@@ -62,9 +64,10 @@ function getHoveredCardId() {
 
 function addDoubleClickEvent() {
   currentCard.addEventListener("dblclick", function() {
-    let textElement = currentCard.querySelector(".text");
-    textElement.contentEditable = "true";
-    textElement.focus();
+    currentCard.classList.add("removecard")
+  });
+  currentCard.addEventListener("animationend",()=>{
+    currentCard.remove();
   });
 }
 
@@ -81,3 +84,5 @@ function addStrike() {
     }
   });
 }
+
+

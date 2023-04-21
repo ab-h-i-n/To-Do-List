@@ -199,3 +199,21 @@ input[type="checkbox"] {
   .focused{
     background-color: red;
   }
+
+
+  .removecard:hover,
+  .removecard{
+    background-color: red;
+    animation: removecard 200ms linear;
+  }
+  @keyframes removecard {
+    from{
+        opacity: 1;
+        transform: translateX(0px);
+        
+    }
+    to{
+        opacity: 0;
+        transform: translateX(500px);
+    }
+  }
